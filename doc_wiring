@@ -1,0 +1,24 @@
+# Wiring NodeMCU ESP8266
+
+## Pin Mapping
+- D1 (GPIO5) -> I2C SCL
+- D2 (GPIO4) -> I2C SDA
+- D6 (GPIO12) -> Relay control (via resistor basis ke NPN)
+
+## I2C
+- DS3231 dan LCD1602 I2C bisa satu bus (paralel SDA/SCL).
+- Gunakan level shifter jika sisi LCD berjalan di 5V.
+
+## Relay Driver (NPN)
+- D6 -> R1 1k -> basis NPN
+- Basis -> R2 10k -> GND (pulldown)
+- Emitter -> GND
+- Collector -> salah satu kaki coil relay
+- Kaki coil relay lain -> +5V
+- Dioda flyback paralel coil:
+  - Anoda ke sisi collector
+  - Katoda ke +5V
+
+## Supply
+- +5V untuk VIN NodeMCU, relay coil, LCD (jika perlu 5V)
+- GND semua modul wajib common ground
